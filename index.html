@@ -22,6 +22,7 @@
     @media(max-width:600px){header{font-size:10px;letter-spacing:1px}.hero{padding-top:45px}.gallery{grid-template-columns:repeat(2,1fr);gap:16px;padding:0}.photo{padding:8px 8px 12px}.photo figcaption{font-size:13px}.messages{grid-template-columns:1fr}.letter{border-radius:75px 75px 12px 12px}.hint{font-size:10px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
     [hidden]{display:none!important}.step-nav{display:flex;justify-content:center;gap:12px;margin:30px 0}.back{background:#f0cad9;color:var(--ink)}.photo .frame{cursor:default}.step-enter{animation:appear .5s ease}@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}.hero{min-height:65vh}
+    .music-player{position:sticky;bottom:12px;z-index:5;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;width:fit-content;max-width:calc(100% - 24px);margin:16px auto;padding:10px 16px;border:1px solid var(--line);border-radius:24px;background:#fff8fbf5;box-shadow:0 4px 20px #63334818}.music-player p{margin:0;font-size:12px;max-width:260px}.music-player button{padding:9px 16px}
   </style>
 </head>
 <body>
@@ -59,8 +60,59 @@
     </section>
     <div class="wish"><span class="eyebrow">One more little thing</span><h2>Tutup mata. Buat satu harapan.</h2><p>Semoga semesta punya cara paling indah untuk mengabulkannya.</p><button type="button" id="wish-button">Kirim harapan ♡</button><div id="surprise" role="status"></div></div>
   </main>
+  <audio id="background-music" loop preload="none"></audio>
+  <aside class="music-player" aria-label="Pemutar musik latar">
+    <button type="button" id="music-toggle" aria-controls="background-music" aria-pressed="false">♫ Putar musik</button>
+    <p id="music-status" role="status">Musik menemani kejutanmu ♡</p>
+  </aside>
   <footer>MADE WITH LOVE & A LITTLE PINK MAGIC ♡</footer>
   <script>
+    // KONFIGURASI MUSIK: masukkan lagu.mp3 ke folder musik/.
+    // Ganti path ini jika nama file berbeda. Tidak ada upload di website.
+    const MUSIK = 'musik/lagu.mp3';
+    const audio = document.getElementById('background-music');
+    const musicButton = document.getElementById('music-toggle');
+    const musicStatus = document.getElementById('music-status');
+    audio.src = MUSIK;
+    audio.volume = 0.45;
+    let musicStarting = false;
+
+    function syncMusic() {
+      const playing = !audio.paused;
+      musicButton.textContent = playing ? 'Ⅱ Jeda musik' : '♫ Putar musik';
+      musicButton.setAttribute('aria-pressed', String(playing));
+    }
+    async function playMusic() {
+      if (musicStarting || !audio.paused) return;
+      musicStarting = true;
+      musicStatus.textContent = 'Memuat musik…';
+      try {
+        await audio.play();
+        musicStatus.textContent = 'Sedang diputar ♡';
+      } catch (error) {
+        musicStatus.textContent = error.name === 'NotAllowedError'
+          ? 'Klik Putar musik untuk memulai.'
+          : 'Musik belum bisa diputar. Coba lagi nanti.';
+      } finally {
+        musicStarting = false;
+        syncMusic();
+      }
+    }
+    audio.addEventListener('play', syncMusic);
+    audio.addEventListener('pause', syncMusic);
+    audio.addEventListener('error', () => {
+      musicStatus.textContent = 'Musik belum bisa diputar. Coba lagi nanti.';
+      syncMusic();
+    });
+    musicButton.addEventListener('click', () => {
+      if (musicStarting) return;
+      if (audio.paused) playMusic();
+      else {
+        audio.pause();
+        musicStatus.textContent = 'Musik dijeda';
+      }
+    });
+
     // KONFIGURASI FOTO: simpan 1.jpg sampai 6.jpg dalam folder foto/.
     // Ganti path di bawah jika nama atau ekstensi foto berbeda.
     const FOTO = ['foto/1.jpg','foto/2.jpg','foto/3.jpg',
@@ -102,7 +154,7 @@
       window.scrollTo(0,0);
       if (focus) steps[index].querySelector('h1,h2,h3')?.focus({preventScroll:true});
     }
-    document.querySelector('[data-next]').addEventListener('click', () => showStep(1));
+    document.querySelector('[data-next]').addEventListener('click', () => { playMusic(); showStep(1); });
     showStep(0, false);
 
     document.getElementById('wish-button').addEventListener('click', () => {
