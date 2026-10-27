@@ -15,35 +15,35 @@
     h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:normal;line-height:1.15} h1{font-size:clamp(46px,9vw,90px);margin:22px 0}h1 em{color:var(--pink)}.hero p{max-width:480px;margin:0 auto 25px;color:#8b6072;font-size:14px}.heart{font-size:36px;color:var(--pink)}
     button,.button{font:inherit;cursor:pointer;border:0;border-radius:100px;background:var(--pink);color:white;padding:12px 25px;text-decoration:none;display:inline-block;font-size:13px;transition:transform .2s,background .2s}button:hover,.button:hover{background:#b53e6b;transform:translateY(-2px)}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #833b63;outline-offset:5px}
     section{margin-bottom:65px}.section-title{text-align:center;margin-bottom:30px}h2{font-size:clamp(30px,5vw,44px);margin:10px 0}.section-title p{font-size:13px;color:#8b6072}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:8px}
-    .photo{margin:0;background:#fffafd;padding:12px 12px 16px;box-shadow:0 7px 20px #9b486414;border:1px solid #f3dce5;transform:rotate(-2deg)}.photo:nth-child(2n){transform:rotate(2deg)}.photo:nth-child(3n){transform:rotate(-1deg)}.photo label{display:flex;position:relative;aspect-ratio:1;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(140deg,#f9d5e3,#f6e8ed);border:1px dashed #dba5bb;cursor:pointer;overflow:hidden;color:#a06780}.photo label:hover{background:#f8cddd}.photo input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.photo label:focus-within{outline:3px solid var(--pink);outline-offset:3px}.photo img{height:100%;width:100%;object-fit:cover;position:absolute;inset:0}.plus{font-size:32px;font-weight:200}.hint{font-size:11px}.photo figcaption{text-align:center;font-family:Georgia,serif;font-style:italic;font-size:16px;margin-top:12px}.note{text-align:center;color:#946779;font-size:12px;margin-top:26px}
+    .photo{margin:0;background:#fffafd;padding:12px 12px 16px;box-shadow:0 7px 20px #9b486414;border:1px solid #f3dce5;transform:rotate(-2deg)}.photo:nth-child(2n){transform:rotate(2deg)}.photo:nth-child(3n){transform:rotate(-1deg)}.photo .frame{display:flex;position:relative;aspect-ratio:1;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(140deg,#f9d5e3,#f6e8ed);border:1px dashed #dba5bb;cursor:pointer;overflow:hidden;color:#a06780}.photo .frame:hover{background:#f8cddd}.photo input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.photo .frame:focus-within{outline:3px solid var(--pink);outline-offset:3px}.photo img{height:100%;width:100%;object-fit:cover;position:absolute;inset:0}.plus{font-size:32px;font-weight:200}.hint{font-size:11px}.photo figcaption{text-align:center;font-family:Georgia,serif;font-style:italic;font-size:16px;margin-top:12px}.note{text-align:center;color:#946779;font-size:12px;margin-top:26px}
     .letter{background:var(--soft);border:1px solid var(--line);border-radius:120px 120px 12px 12px;padding:48px clamp(24px,7vw,90px);text-align:center;box-shadow:0 15px 40px #b7587210}.letter h2{font-size:38px}.letter p{font-size:15px;color:#886073}.signature{font-family:Georgia,serif;font-style:italic;color:var(--pink);font-size:22px;margin-top:25px}
     .messages{display:grid;grid-template-columns:1fr 1fr;gap:20px}.message{border:1px solid var(--line);background:#ffffff70;padding:30px;border-radius:16px}.message h3{font-size:27px;margin:10px 0 15px}.message p{font-size:14px;color:#886073}.number{font-size:11px;color:var(--pink);letter-spacing:2px}.wish{text-align:center;padding:10px 0 45px}.wish p{color:#8b6072;font-size:13px}#surprise{min-height:30px;color:var(--pink);font-family:Georgia,serif;font-style:italic;font-size:20px;margin-top:20px}footer{text-align:center;border-top:1px solid var(--line);padding:25px;font-size:11px;letter-spacing:1px;color:#986b7e}
     .confetti{position:fixed;top:-30px;pointer-events:none;z-index:10;animation:fall 3s linear forwards;color:var(--pink)}@keyframes fall{to{transform:translateY(110vh) rotate(300deg);opacity:0}}
     @media(max-width:600px){header{font-size:10px;letter-spacing:1px}.hero{padding-top:45px}.gallery{grid-template-columns:repeat(2,1fr);gap:16px;padding:0}.photo{padding:8px 8px 12px}.photo figcaption{font-size:13px}.messages{grid-template-columns:1fr}.letter{border-radius:75px 75px 12px 12px}.hint{font-size:10px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    [hidden]{display:none!important}.step-nav{display:flex;justify-content:center;gap:12px;margin:30px 0}.back{background:#f0cad9;color:var(--ink)}.photo .frame{cursor:default}.step-enter{animation:appear .5s ease}@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}.hero{min-height:65vh}
   </style>
 </head>
 <body>
-  <header><span>A LITTLE LOVE LETTER ♡</span><a href="#kenangan">Kenangan kita ↗</a></header>
+  <header><span>A LITTLE LOVE LETTER ♡</span><span id="step-status" role="status">Langkah 1 dari 5</span></header>
   <main>
     <div class="hero">
       <span class="ribbon">✧ Hari ini, tentang kamu ✧</span>
       <h1>Selamat ulang tahun,<br><em>Chii ♡</em></h1>
       <p>Untuk seseorang yang membuat hari biasa terasa istimewa. Semoga hari ini seindah senyummu.</p>
-      <a class="button" href="#ucapan">Ada sesuatu untukmu ↓</a>
+      <button type="button" data-next>Buka kejutannya →</button>
     </div>
     <section id="kenangan" aria-labelledby="gallery-title">
       <div class="section-title"><span class="eyebrow">Our little memories</span><h2>Enam bingkai, banyak cerita.</h2><p>Potongan kecil kebahagiaan yang ingin selalu disimpan.</p></div>
       <div class="gallery">
-        <figure class="photo"><label><span class="plus">♡</span><span class="hint">Pilih foto pertama</span><input type="file" accept="image/*" aria-label="Pilih foto pertama"></label><figcaption>awal cerita kita</figcaption></figure>
-        <figure class="photo"><label><span class="plus">✿</span><span class="hint">Pilih foto kedua</span><input type="file" accept="image/*" aria-label="Pilih foto kedua"></label><figcaption>senyum favoritku</figcaption></figure>
-        <figure class="photo"><label><span class="plus">✧</span><span class="hint">Pilih foto ketiga</span><input type="file" accept="image/*" aria-label="Pilih foto ketiga"></label><figcaption>hari yang manis</figcaption></figure>
-        <figure class="photo"><label><span class="plus">✧</span><span class="hint">Pilih foto keempat</span><input type="file" accept="image/*" aria-label="Pilih foto keempat"></label><figcaption>tawa tanpa alasan</figcaption></figure>
-        <figure class="photo"><label><span class="plus">♡</span><span class="hint">Pilih foto kelima</span><input type="file" accept="image/*" aria-label="Pilih foto kelima"></label><figcaption>tempat paling nyaman</figcaption></figure>
-        <figure class="photo"><label><span class="plus">✿</span><span class="hint">Pilih foto keenam</span><input type="file" accept="image/*" aria-label="Pilih foto keenam"></label><figcaption>masih banyak cerita lagi</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>awal cerita kita</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>senyum favoritku</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>hari yang manis</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>tawa tanpa alasan</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>tempat paling nyaman</figcaption></figure>
+        <figure class="photo"><div class="frame"><span class="plus">♡</span></div><figcaption>masih banyak cerita lagi</figcaption></figure>
       </div>
-      <p class="note">Klik bingkai untuk memilih atau mengganti foto. Foto hanya tampil di perangkat ini selama halaman terbuka; tidak diunggah atau disimpan.</p>
-      <p id="photo-status" role="status" class="note"></p>
+
     </section>
     <section class="letter" id="ucapan" aria-labelledby="letter-title">
       <div class="heart" aria-hidden="true">♡</div><span class="eyebrow">A wish just for you</span>
@@ -61,26 +61,50 @@
   </main>
   <footer>MADE WITH LOVE & A LITTLE PINK MAGIC ♡</footer>
   <script>
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-      input.addEventListener('change', () => {
-        const file = input.files[0];
-        if (!file) return;
-        const status = document.getElementById('photo-status');
-        if (!file.type.startsWith('image/')) { status.textContent = 'Pilih berkas gambar, ya.'; input.value = ''; return; }
-        if (file.size > 15 * 1024 * 1024) { status.textContent = 'Foto terlalu besar. Pilih foto di bawah 15 MB.'; input.value = ''; return; }
-        const url = URL.createObjectURL(file);
-        const img = new Image();
-        img.alt = input.closest('figure').querySelector('figcaption').textContent;
-        img.onload = () => {
-          input.parentElement.querySelector('img')?.remove();
-          input.parentElement.insertBefore(img, input);
-          URL.revokeObjectURL(url);
-          status.textContent = 'Foto berhasil dipasang. Klik bingkai lagi untuk menggantinya.';
-        };
-        img.onerror = () => { URL.revokeObjectURL(url); status.textContent = 'Gambar tidak bisa dibuka. Coba format JPG, PNG, atau WebP.'; };
-        img.src = url;
-      });
+    // KONFIGURASI FOTO: simpan 1.jpg sampai 6.jpg dalam folder foto/.
+    // Ganti path di bawah jika nama atau ekstensi foto berbeda.
+    const FOTO = ['foto/1.jpg','foto/2.jpg','foto/3.jpg',
+                  'foto/4.jpg','foto/5.jpg','foto/6.jpg'];
+    document.querySelectorAll('.photo').forEach((card, i) => {
+      const img = new Image();
+      img.alt = card.querySelector('figcaption').textContent;
+      img.onload = () => card.querySelector('.frame').replaceChildren(img);
+      img.src = FOTO[i];
     });
+
+    const steps = [...document.querySelector('main').children];
+    let activeStep = 0;
+    steps.forEach((step, i) => {
+      const heading = step.querySelector('h1,h2,h3');
+      if (heading) heading.tabIndex = -1;
+      if (i > 0) {
+        const nav = document.createElement('div');
+        nav.className = 'step-nav';
+        const back = document.createElement('button');
+        back.type = 'button'; back.className = 'back';
+        back.textContent = '← Kembali';
+        back.addEventListener('click', () => showStep(i - 1));
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.textContent = i === steps.length - 1 ? 'Baca dari awal ↺' : 'Lanjut →';
+        next.addEventListener('click', () => showStep((i + 1) % steps.length));
+        nav.append(back, next); step.append(nav);
+      }
+    });
+    function showStep(index, focus = true) {
+      activeStep = index;
+      steps.forEach((step,i) => {
+        step.hidden = i !== index;
+        step.classList.toggle('step-enter', i === index);
+      });
+      document.getElementById('step-status').textContent =
+        'Langkah ' + (index + 1) + ' dari ' + steps.length;
+      window.scrollTo(0,0);
+      if (focus) steps[index].querySelector('h1,h2,h3')?.focus({preventScroll:true});
+    }
+    document.querySelector('[data-next]').addEventListener('click', () => showStep(1));
+    showStep(0, false);
+
     document.getElementById('wish-button').addEventListener('click', () => {
       document.getElementById('surprise').textContent = 'Semoga semua doa baik menemukanmu, Chii. Happy birthday! ♡';
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
